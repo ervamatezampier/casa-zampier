@@ -1,4 +1,4 @@
-import './App.css'
+﻿import './App.css'
 
 const menu = [
   'Nossa Família',
@@ -8,34 +8,14 @@ const menu = [
   'Contato',
 ]
 
-const pillars = [
-  {
-    icon: '♧',
-    title: 'Da floresta para a sua melhor versão',
-  },
-  {
-    icon: '☘',
-    title: 'Qualidade exclusiva. Sabor que transforma.',
-  },
-  {
-    icon: '☕',
-    title: 'Experiência única, puro equilíbrio.',
-  },
-]
-
-const badges = [
-  '100% Orgânico Certificado',
-  'Produção Sustentável',
-  'Premiada Internacionalmente',
-  'Sabor Único e Inconfundível',
-]
+const asset = (path) => `${import.meta.env.BASE_URL}${path}`
 
 function App() {
   return (
     <main>
       <nav className="nav">
-        <a className="navBrand" href="#home" aria-label="Casa Zampier">
-          <img src="/images/crest.png" alt="Brasão Casa Zampier" />
+        <a className="navBrand" href="#home">
+          <img src={asset('images/crest.png')} alt="Brasão Casa Zampier" />
           <span>CASA ZAMPIER</span>
         </a>
 
@@ -48,13 +28,19 @@ function App() {
         </div>
       </nav>
 
-      <section className="hero" id="home">
+      <section
+        className="hero"
+        id="home"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 14, 8, 0.18), rgba(0, 14, 8, 0.80)), url(${asset('images/hero-mate.jpg')})`,
+        }}
+      >
         <div className="heroOverlay" />
 
         <div className="heroContent">
           <img
             className="heroCrest"
-            src="/images/crest.png"
+            src={asset('images/crest.png')}
             alt="Brasão Família Zampier"
           />
 
@@ -67,21 +53,28 @@ function App() {
             CONHEÇA NOSSA HISTÓRIA
           </a>
 
-          <div className="scrollArrow">⌄</div>
-
           <div className="premiumBox">
-            {pillars.map((pillar) => (
-              <div key={pillar.title}>
-                <span>{pillar.icon}</span>
-                <h3>{pillar.title}</h3>
-              </div>
-            ))}
+            <div>
+              <span>♧</span>
+              <h3>DA FLORESTA PARA A SUA MELHOR VERSÃO</h3>
+            </div>
+
+            <div>
+              <span>☘</span>
+              <h3>QUALIDADE EXCLUSIVA. SABOR QUE TRANSFORMA.</h3>
+            </div>
+
+            <div>
+              <span>☕</span>
+              <h3>EXPERIÊNCIA ÚNICA, PURO EQUILÍBRIO.</h3>
+            </div>
           </div>
 
           <div className="badges">
-            {badges.map((badge) => (
-              <p key={badge}>{badge}</p>
-            ))}
+            <p>100% ORGÂNICO CERTIFICADO</p>
+            <p>PRODUÇÃO SUSTENTÁVEL</p>
+            <p>PREMIADA INTERNACIONALMENTE</p>
+            <p>SABOR ÚNICO E INCONFUNDÍVEL</p>
           </div>
         </div>
       </section>
@@ -116,10 +109,12 @@ function App() {
             title="QIMA IBD"
             text="Certificação orgânica que reforça nosso compromisso com qualidade, rastreabilidade e produção responsável."
           />
+
           <Card
             title="IG-Mathe São Matheus"
             text="Indicação Geográfica que valoriza a origem, o território e a tradição produtiva de São Mateus do Sul."
           />
+
           <Card
             title="Mata Atlântica"
             text="Manejo integrado à biodiversidade, com ervais nativos, araucárias e preservação ambiental."
@@ -128,7 +123,7 @@ function App() {
       </section>
 
       <Section
-        id="ciencia-do-mate"
+        id="a-ciencia-do-mate"
         eyebrow="A Ciência do Mate"
         title="Natureza, tradição e compostos bioativos."
         text="A erva-mate é reconhecida por seus compostos naturais como cafeína, teobromina, saponinas e antioxidantes. A Casa Zampier valoriza essa riqueza de forma responsável, apresentando o mate como uma bebida natural, energética e sofisticada."
@@ -215,9 +210,6 @@ function slugify(text) {
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
-    .replace(/ç/g, 'c')
-    .replace(/ã/g, 'a')
-    .replace(/õ/g, 'o')
     .replace(/\s+/g, '-')
 }
 
